@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RN Interiors by Vaishnavi | Luxury Interior Designer in Pune & Mumbai</title>
+    <meta name="description" content="RN Interiors by Vaishnavi - Premium interior design solutions for residential, commercial, modular kitchens, and luxury living spaces in Pune, Mumbai, Nashik, and beyond.">
+    <meta name="keywords" content="RN Interiors, Vaishnavi Interior Designer, Luxury Interior Pune, Home Interiors Mumbai, Modular Kitchen, Turnkey Interiors">
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS for Responsive Utility Layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#E6C665',
+                            DEFAULT: '#D4AF37',
+                            dark: '#AA820A'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 transition-colors duration-300 backdrop-blur-md" style="background-color: var(--header-bg); border-bottom: 1px solid var(--border-color);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo & Name -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full border border-gold flex items-center justify-center bg-black overflow-hidden shadow-lg">
+                        <span class="font-cinzel text-xl font-bold text-yellow-500">RN</span>
+                    </div>
+                    <div>
+                        <span class="block font-cinzel text-lg sm:text-xl font-bold tracking-wider gold-text">RN INTERIORS</span>
+                        <span class="block text-xs tracking-widest text-gray-400 font-sans uppercase">by Vaishnavi</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#home" class="hover:text-amber-500 transition-colors" data-i18n="home">Home</a>
+                    <a href="#about" class="hover:text-amber-500 transition-colors" data-i18n="about">About Us</a>
+                    <a href="#services" class="hover:text-amber-500 transition-colors" data-i18n="services">Services</a>
+                    <a href="#projects" class="hover:text-amber-500 transition-colors" data-i18n="projects">Projects</a>
+                    <a href="#gallery" class="hover:text-amber-500 transition-colors" data-i18n="gallery">Gallery</a>
+                    <a href="#process" class="hover:text-amber-500 transition-colors" data-i18n="process">Process</a>
+                    <a href="#locations" class="hover:text-amber-500 transition-colors" data-i18n="locations">Locations</a>
+                    <a href="#contact" class="hover:text-amber-500 transition-colors" data-i18n="contact">Contact</a>
+                </nav>
+
+                <!-- Actions: Language Select, Theme Toggle & Quote CTA -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <!-- Language Selector -->
+                    <div class="relative">
+                        <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-transparent border border-yellow-600/50 rounded-md px-2 py-1 text-xs focus:outline-none focus:border-yellow-500 cursor-pointer">
+                            <option value="en" class="bg-black text-white">EN</option>
+                            <option value="mr" class="bg-black text-white">मराठी</option>
+                            <option value="hi" class="bg-black text-white">हिन्दी</option>
+                        </select>
+                    </div>
+
+                    <!-- Day/Night Mode Toggle -->
+                    <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 border border-yellow-600/50 rounded-full hover:border-yellow-500 text-yellow-500 transition-colors" title="Toggle Mode">
+                        <i id="themeIcon" class="fas fa-moon"></i>
+                    </button>
+
+                    <!-- Get Quote Button -->
+                    <a href="#contact" class="gold-btn px-4 py-2 rounded-md text-xs uppercase tracking-wider font-semibold" data-i18n="getQuote">Get a Quote</a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex items-center gap-3 lg:hidden">
+                    <button id="mobileThemeToggle" onclick="toggleTheme()" class="p-1.5 border border-yellow-600/50 rounded-full text-yellow-500">
+                        <i id="mobileThemeIcon" class="fas fa-moon text-sm"></i>
+                    </button>
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2 text-2xl focus:outline-none" style="color: var(--gold);">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden lg:hidden px-4 pt-2 pb-6 space-y-3 transition-all border-t" style="background-color: var(--bg-secondary); border-color: var(--border-color);">
+            <div class="flex justify-between items-center py-2 border-b border-gray-800">
+                <span class="text-xs font-semibold text-gray-400">LANGUAGE</span>
+                <div class="flex space-x-2 text-xs">
+                    <button onclick="changeLanguage('en')" class="px-2 py-1 border border-yellow-600/40 rounded">EN</button>
+                    <button onclick="changeLanguage('mr')" class="px-2 py-1 border border-yellow-600/40 rounded">मराठी</button>
+                    <button onclick="changeLanguage('hi')" class="px-2 py-1 border border-yellow-600/40 rounded">हिन्दी</button>
+                </div>
+            </div>
+            <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-amber-500" data-i18n="home">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-amber-500" data-i18n="about">About Us</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-amber-500" data-i18n="services">Services</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-amber-500" data-i18n="projects">Projects</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-amber-500" data-i18n="gallery">Gallery</a>
+            <a href="#process" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-amber-500" data-i18n="process">Process</a>
+            <a href="#locations" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-amber-500" data-i18n="locations">Locations</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-amber-500" data-i18n="contact">Contact</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-center gold-btn py-3 rounded-md uppercase font-semibold text-sm mt-4" data-i18n="getQuote">Get Free Consultation</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000" alt="Luxury Living Room Interior" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/80"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center text-white">
+            <span class="inline-block border-y border-yellow-500/60 px-4 py-1.5 text-xs sm:text-sm font-semibold tracking-widest text-amber-400 uppercase mb-6" data-i18n="heroSubtitle">
+                RN INTERIORS BY VAISHNAVI
+            </span>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight font-cinzel gold-text" data-i18n="heroTitle">
+                Transforming Spaces Into Timeless Luxury
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 font-light leading-relaxed" data-i18n="heroDesc">
+                Premium Interior Design Solutions Crafted Around Your Lifestyle.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#projects" class="w-full sm:w-auto gold-btn px-8 py-4 rounded-md text-sm uppercase font-semibold tracking-wider text-center" data-i18n="viewProjects">
+                    View Our Projects
+                </a>
+                <a href="#contact" class="w-full sm:w-auto gold-btn-outline px-8 py-4 rounded-md text-sm uppercase font-semibold tracking-wider text-center" data-i18n="freeConsultation">
+                    Get Free Consultation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20" style="background-color: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="relative">
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden border border-yellow-500/30 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200" alt="Interior Designer Vaishnavi" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 hidden sm:block theme-card p-6 rounded-lg shadow-2xl max-w-xs border-l-4 border-yellow-500">
+                        <span class="block text-3xl font-bold font-cinzel text-amber-500">8+ Years</span>
+                        <span class="text-xs text-gray-400 font-medium" data-i18n="expLabel">Delivering Architectural & Interior Excellence</span>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="inline-block border-b-2 border-yellow-500 pb-1 text-xs uppercase tracking-widest font-semibold text-amber-500" data-i18n="aboutHeader">
+                        ABOUT OUR STUDIO
+                    </div>
+                    <h2 class="text-2xl sm:text-4xl font-bold font-cinzel leading-tight" data-i18n="aboutTitle">
+                        Crafting Sophisticated Spaces That Tell Your Story
+                    </h2>
+                    <p class="text-sm sm:text-base leading-relaxed text-gray-400" data-i18n="aboutDesc">
+                        RN Interiors by Vaishnavi is a premier design agency dedicated to turning blank spaces into breathtaking works of art. Founded on principles of precision, aesthetic luxury, and functionality, we handle full end-to-end turnkey transformations for modern homes and corporate spaces across Maharashtra.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-gem text-xl text-amber-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm font-cinzel" data-i18n="pillar1Title">Uncompromised Luxury</h4>
+                                <p class="text-xs text-gray-400" data-i18n="pillar1Desc">Bespoke materials & premium finishes.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-drafting-compass text-xl text-amber-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm font-cinzel" data-i18n="pillar2Title">Customized Design</h4>
+                                <p class="text-xs text-gray-400" data-i18n="pillar2Desc">Tailored 3D concepts for your layout.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-clock text-xl text-amber-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm font-cinzel" data-i18n="pillar3Title">On-Time Execution</h4>
+                                <p class="text-xs text-gray-400" data-i18n="pillar3Desc">Guaranteed delivery timelines.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-handshake text-xl text-amber-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm font-cinzel" data-i18n="pillar4Title">Transparent Pricing</h4>
+                                <p class="text-xs text-gray-400" data-i18n="pillar4Desc">Clear quotes with zero hidden fees.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div>
+                            <span class="block text-sm font-bold font-cinzel">Vaishnavi</span>
+                            <span class="text-xs text-amber-500" data-i18n="founderTitle">Principal Designer & Founder</span>
+                        </div>
+                        <div class="flex gap-4 text-xs font-semibold">
+                            <span class="text-amber-500"><i class="fas fa-phone mr-1"></i> 7038693016</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-semibold tracking-widest text-amber-500 uppercase border-b border-yellow-500/50 pb-1" data-i18n="servicesSubtitle">WHAT WE OFFER</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-cinzel mt-4" data-i18n="servicesTitle">Bespoke Interior Solutions</h2>
+                <p class="text-sm text-gray-400 mt-2" data-i18n="servicesDesc">Comprehensive design and execution services tailored to your aesthetic tastes and functional requirements.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="theme-card p-8 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-lg bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 text-2xl mb-6">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-cinzel mb-3" data-i18n="s1Title">Residential Interiors</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6" data-i18n="s1Desc">Complete villa and apartment interiors designed with modern luxury, customized lighting, and handpicked furnishings.</p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-2" data-i18n="learnMore">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="theme-card p-8 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-lg bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 text-2xl mb-6">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-cinzel mb-3" data-i18n="s2Title">Modular Kitchens</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6" data-i18n="s2Desc">Ergonomic, high-durability modular kitchen systems featuring acrylic, laminate, or lacquered glass finishes.</p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-2" data-i18n="learnMore">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="theme-card p-8 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-lg bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 text-2xl mb-6">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-cinzel mb-3" data-i18n="s3Title">Commercial & Offices</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6" data-i18n="s3Desc">Professional workspace design engineered for productivity, brand image, and acoustic efficiency.</p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-2" data-i18n="learnMore">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="theme-card p-8 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-lg bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 text-2xl mb-6">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-cinzel mb-3" data-i18n="s4Title">Turnkey Interior Solutions</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6" data-i18n="s4Desc">End-to-end management from civil work, ceiling, wiring, and carpentry to final deep cleaning and handover.</p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-2" data-i18n="learnMore">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="theme-card p-8 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-lg bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 text-2xl mb-6">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-cinzel mb-3" data-i18n="s5Title">Living & Bedroom Decor</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6" data-i18n="s5Desc">Serene master bedrooms and regal living rooms equipped with mood lighting, accent walls, and custom wardrobes.</p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-2" data-i18n="learnMore">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="theme-card p-8 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-lg bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 text-2xl mb-6">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-cinzel mb-3" data-i18n="s6Title">Renovation & Remodeling</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6" data-i18n="s6Desc">Transform existing homes into modern luxury habitats with upgraded layouts and high-grade finishes.</p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold text-amber-500 hover:underline flex items-center gap-2" data-i18n="learnMore">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Slideshow Section -->
+    <section id="projects" class="py-20" style="background-color: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-xs font-semibold tracking-widest text-amber-500 uppercase border-b border-yellow-500/50 pb-1" data-i18n="projectsSubtitle">PORTFOLIO HIGHLIGHTS</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-cinzel mt-4" data-i18n="projectsTitle">Our Featured Projects</h2>
+                </div>
+                <div class="flex items-center space-x-3 mt-6 md:mt-0">
+                    <button onclick="prevSlide()" class="w-12 h-12 rounded-full border border-yellow-600/50 flex items-center justify-center text-amber-500 hover:bg-yellow-500 hover:text-black transition-all">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="nextSlide()" class="w-12 h-12 rounded-full border border-yellow-600/50 flex items-center justify-center text-amber-500 hover:bg-yellow-500 hover:text-black transition-all">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="carouselContainer" class="relative overflow-hidden rounded-2xl border border-yellow-500/20 shadow-2xl min-h-[450px]">
+                
+                <div class="carousel-item active relative w-full h-[500px]">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600" class="w-full h-full object-cover" alt="Luxury Villa Interior">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8 sm:p-12 flex flex-col justify-end">
+                        <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-2" data-i18n="proj1Cat">RESIDENTIAL VILLA</span>
+                        <h3 class="text-2xl sm:text-4xl font-bold font-cinzel text-white mb-2" data-i18n="proj1Title">The Grand Regency Apartment</h3>
+                        <p class="text-xs sm:text-sm text-gray-300 max-w-2xl mb-4" data-i18n="proj1Desc">Baner, Pune — A 4BHK lavish residence featuring Italian marble flooring, ambient warm lighting, and custom teak wood accents.</p>
+                        <button onclick="openLightbox('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600', 'The Grand Regency Apartment', 'Baner, Pune')" class="gold-btn w-fit px-6 py-2.5 rounded text-xs uppercase font-semibold" data-i18n="viewProject">View Project</button>
+                    </div>
+                </div>
+
+                <div class="carousel-item relative w-full h-[500px]">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1600" class="w-full h-full object-cover" alt="Modern Living Room">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8 sm:p-12 flex flex-col justify-end">
+                        <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-2" data-i18n="proj2Cat">LUXURY RESIDENCE</span>
+                        <h3 class="text-2xl sm:text-4xl font-bold font-cinzel text-white mb-2" data-i18n="proj2Title">Minimalist Penthouse Living</h3>
+                        <p class="text-xs sm:text-sm text-gray-300 max-w-2xl mb-4" data-i18n="proj2Desc">Worli, Mumbai — Sleek monochrome hues accented with brushed brass trims and modular ceiling profiles.</p>
+                        <button onclick="openLightbox('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1600', 'Minimalist Penthouse Living', 'Worli, Mumbai')" class="gold-btn w-fit px-6 py-2.5 rounded text-xs uppercase font-semibold" data-i18n="viewProject">View Project</button>
+                    </div>
+                </div>
+
+                <div class="carousel-item relative w-full h-[500px]">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1600" class="w-full h-full object-cover" alt="Modular Kitchen">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8 sm:p-12 flex flex-col justify-end">
+                        <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-2" data-i18n="proj3Cat">MODULAR KITCHEN</span>
+                        <h3 class="text-2xl sm:text-4xl font-bold font-cinzel text-white mb-2" data-i18n="proj3Title">Opulent Kitchen Studio</h3>
+                        <p class="text-xs sm:text-sm text-gray-300 max-w-2xl mb-4" data-i18n="proj3Desc">Koregaon Park, Pune — Smart handle-less cabinets, quartz countertops, and integrated Blum fittings.</p>
+                        <button onclick="openLightbox('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1600', 'Opulent Kitchen Studio', 'Koregaon Park, Pune')" class="gold-btn w-fit px-6 py-2.5 rounded text-xs uppercase font-semibold" data-i18n="viewProject">View Project</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-center items-center space-x-2 mt-6" id="carouselDots">
+                <button onclick="goToSlide(0)" class="w-3 h-3 rounded-full bg-yellow-500"></button>
+                <button onclick="goToSlide(1)" class="w-3 h-3 rounded-full bg-gray-600"></button>
+                <button onclick="goToSlide(2)" class="w-3 h-3 rounded-full bg-gray-600"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-semibold tracking-widest text-amber-500 uppercase border-b border-yellow-500/50 pb-1" data-i18n="gallerySubtitle">INSPIRATION & DESIGNS</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-cinzel mt-4" data-i18n="galleryTitle">Project Gallery</h2>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10 text-xs sm:text-sm font-medium">
+                <button onclick="filterGallery('all')" class="gallery-filter-btn border border-yellow-500/40 px-4 py-2 rounded-full text-amber-500 active bg-yellow-500/10" data-filter="all" data-i18n="catAll">All Projects</button>
+                <button onclick="filterGallery('residential')" class="gallery-filter-btn border border-yellow-500/40 px-4 py-2 rounded-full hover:text-amber-500" data-filter="residential" data-i18n="catResidential">Residential</button>
+                <button onclick="filterGallery('kitchen')" class="gallery-filter-btn border border-yellow-500/40 px-4 py-2 rounded-full hover:text-amber-500" data-filter="kitchen" data-i18n="catKitchen">Kitchen</button>
+                <button onclick="filterGallery('bedroom')" class="gallery-filter-btn border border-yellow-500/40 px-4 py-2 rounded-full hover:text-amber-500" data-filter="bedroom" data-i18n="catBedroom">Bedroom</button>
+                <button onclick="filterGallery('commercial')" class="gallery-filter-btn border border-yellow-500/40 px-4 py-2 rounded-full hover:text-amber-500" data-filter="commercial" data-i18n="catCommercial">Commercial</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+                
+                <div class="gallery-item residential theme-card rounded-xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200', 'Royal Living Room', 'Pune')">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Royal Living Room">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center items-center text-center p-4">
+                            <span class="text-xs text-amber-400 uppercase font-semibold">Residential</span>
+                            <h4 class="text-lg font-bold font-cinzel text-white">Royal Living Room</h4>
+                            <p class="text-xs text-gray-300 mt-1"><i class="fas fa-search-plus text-amber-500 text-lg"></i></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item kitchen theme-card rounded-xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1200', 'Lacquered Island Kitchen', 'Mumbai')">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Lacquered Island Kitchen">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center items-center text-center p-4">
+                            <span class="text-xs text-amber-400 uppercase font-semibold">Kitchen</span>
+                            <h4 class="text-lg font-bold font-cinzel text-white">Lacquered Island Kitchen</h4>
+                            <p class="text-xs text-gray-300 mt-1"><i class="fas fa-search-plus text-amber-500 text-lg"></i></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item bedroom theme-card rounded-xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=1200', 'Master Suite Sanctuary', 'Nashik')">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Master Bedroom">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center items-center text-center p-4">
+                            <span class="text-xs text-amber-400 uppercase font-semibold">Bedroom</span>
+                            <h4 class="text-lg font-bold font-cinzel text-white">Master Suite Sanctuary</h4>
+                            <p class="text-xs text-gray-300 mt-1"><i class="fas fa-search-plus text-amber-500 text-lg"></i></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item commercial theme-card rounded-xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200', 'Corporate Boardroom Design', 'Pune')">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Corporate Boardroom">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center items-center text-center p-4">
+                            <span class="text-xs text-amber-400 uppercase font-semibold">Commercial</span>
+                            <h4 class="text-lg font-bold font-cinzel text-white">Executive Corporate Suite</h4>
+                            <p class="text-xs text-gray-300 mt-1"><i class="fas fa-search-plus text-amber-500 text-lg"></i></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item residential theme-card rounded-xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200', 'Contemporary Villa Hall', 'Bengaluru')">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Contemporary Villa Hall">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center items-center text-center p-4">
+                            <span class="text-xs text-amber-400 uppercase font-semibold">Residential</span>
+                            <h4 class="text-lg font-bold font-cinzel text-white">Contemporary Villa Hall</h4>
+                            <p class="text-xs text-gray-300 mt-1"><i class="fas fa-search-plus text-amber-500 text-lg"></i></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item kitchen theme-card rounded-xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&q=80&w=1200', 'Minimal Matte Modular Kitchen', 'Nagpur')">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Matte Kitchen">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center items-center text-center p-4">
+                            <span class="text-xs text-amber-400 uppercase font-semibold">Kitchen</span>
+                            <h4 class="text-lg font-bold font-cinzel text-white">Minimal Matte Modular Kitchen</h4>
+                            <p class="text-xs text-gray-300 mt-1"><i class="fas fa-search-plus text-amber-500 text-lg"></i></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal justify-center items-center p-4">
+        <div class="relative max-w-4xl w-full bg-black border border-yellow-500/40 rounded-xl overflow-hidden shadow-2xl">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl z-20 hover:text-amber-500"><i class="fas fa-times"></i></button>
+            <div class="relative aspect-[16/9]">
+                <img id="lightboxImg" src="" class="w-full h-full object-cover" alt="Lightbox View">
+            </div>
+            <div class="p-6 bg-stone-950 text-white flex justify-between items-center border-t border-yellow-500/20">
+                <div>
+                    <h3 id="lightboxTitle" class="text-xl font-bold font-cinzel gold-text">Project Title</h3>
+                    <p id="lightboxLoc" class="text-xs text-gray-400">Location</p>
+                </div>
+                <a href="#contact" onclick="closeLightbox()" class="gold-btn px-4 py-2 rounded text-xs uppercase" data-i18n="getQuote">Enquire Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Before & After Comparison Section -->
+    <section class="py-20" style="background-color: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-semibold tracking-widest text-amber-500 uppercase border-b border-yellow-500/50 pb-1" data-i18n="baSubtitle">TRANSFORMATION STORIES</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-cinzel mt-4" data-i18n="baTitle">From Vision to Reality</h2>
+                <p class="text-sm text-gray-400 mt-2" data-i18n="baDesc">Drag the visual slider to experience our signature before-and-after room makeover.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="ba-slider aspect-[16/9]" id="baSlider">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1200" alt="Before Interior Renovation">
+                    <div class="ba-after" id="baAfter">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200" alt="After Interior Renovation">
+                    </div>
+                    <div class="ba-handle" id="baHandle">
+                        <div class="ba-handle-btn">
+                            <i class="fas fa-arrows-alt-h"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between text-xs font-semibold text-gray-400 mt-3 px-2">
+                    <span data-i18n="labelBefore">BEFORE RENOVATION</span>
+                    <span data-i18n="labelAfter" class="text-amber-500">AFTER RN TRANSFORMATION</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Process Section -->
+    <section id="process" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-semibold tracking-widest text-amber-500 uppercase border-b border-yellow-500/50 pb-1" data-i18n="procSubtitle">OUR METHODOLOGY</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-cinzel mt-4" data-i18n="procTitle">6-Step Design Journey</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="theme-card p-6 rounded-xl relative border-t-2 border-yellow-500">
+                    <span class="text-4xl font-bold font-cinzel gold-text opacity-40">01</span>
+                    <h3 class="text-lg font-bold font-cinzel mt-2 mb-2" data-i18n="p1Title">Consultation</h3>
+                    <p class="text-xs text-gray-400" data-i18n="p1Desc">In-depth discussion regarding lifestyle, preferences, functional needs, and budget allocation.</p>
+                </div>
+                <div class="theme-card p-6 rounded-xl relative border-t-2 border-yellow-500">
+                    <span class="text-4xl font-bold font-cinzel gold-text opacity-40">02</span>
+                    <h3 class="text-lg font-bold font-cinzel mt-2 mb-2" data-i18n="p2Title">Site Measurement</h3>
+                    <p class="text-xs text-gray-400" data-i18n="p2Desc">On-site technical evaluation, carpet area calculations, structural analysis, and plumbing check.</p>
+                </div>
+                <div class="theme-card p-6 rounded-xl relative border-t-2 border-yellow-500">
+                    <span class="text-4xl font-bold font-cinzel gold-text opacity-40">03</span>
+                    <h3 class="text-lg font-bold font-cinzel mt-2 mb-2" data-i18n="p3Title">3D Design & Concept</h3>
+                    <p class="text-xs text-gray-400" data-i18n="p3Desc">Realistic 3D visual walkthroughs, mood boards, color themes, and space optimization plan.</p>
+                </div>
+                <div class="theme-card p-6 rounded-xl relative border-t-2 border-yellow-500">
+                    <span class="text-4xl font-bold font-cinzel gold-text opacity-40">04</span>
+                    <h3 class="text-lg font-bold font-cinzel mt-2 mb-2" data-i18n="p4Title">Material Selection</h3>
+                    <p class="text-xs text-gray-400" data-i18n="p4Desc">Guided selection of premium laminates, veneers, hardware, marbles, lighting, and fabrics.</p>
+                </div>
+                <div class="theme-card p-6 rounded-xl relative border-t-2 border-yellow-500">
+                    <span class="text-4xl font-bold font-cinzel gold-text opacity-40">05</span>
+                    <h3 class="text-lg font-bold font-cinzel mt-2 mb-2" data-i18n="p5Title">Execution</h3>
+                    <p class="text-xs text-gray-400" data-i18n="p5Desc">Supervised construction work, modular production, electrical fittings, and quality checks.</p>
+                </div>
+                <div class="theme-card p-6 rounded-xl relative border-t-2 border-yellow-500">
+                    <span class="text-4xl font-bold font-cinzel gold-text opacity-40">06</span>
+                    <h3 class="text-lg font-bold font-cinzel mt-2 mb-2" data-i18n="p6Title">Final Handover</h3>
+                    <p class="text-xs text-gray-400" data-i18n="p6Desc">Deep site cleaning, white-glove touchup, furniture placement, and key handover.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Coverage Section -->
+    <section id="locations" class="py-16" style="background-color: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-xs font-semibold tracking-widest text-amber-500 uppercase border-b border-yellow-500/50 pb-1" data-i18n="locSubtitle">REGION COVERAGE</span>
+            <h2 class="text-3xl font-bold font-cinzel mt-4 mb-8" data-i18n="locTitle">Serving Luxury Homes Across India</h2>
+            
+            <div class="flex flex-wrap justify-center gap-4 text-xs font-semibold">
+                <a href="#contact" class="theme-card px-6 py-3 rounded-full hover:border-yellow-500 transition-colors flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-amber-500"></i> Interior Designer in Pune
+                </a>
+                <a href="#contact" class="theme-card px-6 py-3 rounded-full hover:border-yellow-500 transition-colors flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-amber-500"></i> Interior Designer in Mumbai
+                </a>
+                <a href="#contact" class="theme-card px-6 py-3 rounded-full hover:border-yellow-500 transition-colors flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-amber-500"></i> Interior Designer in Nashik
+                </a>
+                <a href="#contact" class="theme-card px-6 py-3 rounded-full hover:border-yellow-500 transition-colors flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-amber-500"></i> Interior Designer in Nagpur
+                </a>
+                <a href="#contact" class="theme-card px-6 py-3 rounded-full hover:border-yellow-500 transition-colors flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-amber-500"></i> Interior Designer in Bengaluru
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <div>
+                    <span class="text-xs font-semibold tracking-widest text-amber-500 uppercase border-b border-yellow-500/50 pb-1" data-i18n="contactSubtitle">GET IN TOUCH</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-cinzel mt-4 mb-6" data-i18n="contactTitle">Let's Design Your Dream Space</h2>
+                    <p class="text-sm text-gray-400 mb-8" data-i18n="contactDesc">Reach out to RN Interiors by Vaishnavi for a complimentary design consultation, site visit, or quote request.</p>
+
+                    <div class="space-y-6 text-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 shrink-0">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold font-cinzel" data-i18n="phoneLabel">Direct Call</h4>
+                                <p class="text-gray-400 mt-0.5">7038693016 / 8855063003</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 shrink-0">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold font-cinzel" data-i18n="waLabel">WhatsApp Consultation</h4>
+                                <p class="text-gray-400 mt-0.5">+91 7038693016</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold font-cinzel" data-i18n="emailLabel">Email Enquiry</h4>
+                                <p class="text-gray-400 mt-0.5">info@rninteriors.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-amber-500 shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold font-cinzel" data-i18n="addressLabel">Main Studio Address</h4>
+                                <p class="text-gray-400 mt-0.5">Baner Road, Near Jupiter Hospital, Pune, Maharashtra 411045</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme-card p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold font-cinzel mb-6 gold-text" data-i18n="formTitle">Send Us A Message</h3>
+                    
+                    <form id="enquiryForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase mb-1" data-i18n="formName">Full Name *</label>
+                            <input type="text" id="formName" required placeholder="e.g. Rahul Sharma" class="w-full px-4 py-3 text-sm rounded-md border border-yellow-500/30 focus:outline-none focus:border-yellow-500" style="background-color: var(--input-bg);">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase mb-1" data-i18n="formMobile">Mobile Number *</label>
+                                <input type="tel" id="formMobile" required pattern="[0-9]{10}" placeholder="10-digit number" class="w-full px-4 py-3 text-sm rounded-md border border-yellow-500/30 focus:outline-none focus:border-yellow-500" style="background-color: var(--input-bg);">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase mb-1" data-i18n="formCity">City *</label>
+                                <input type="text" id="formCity" required placeholder="e.g. Pune / Mumbai" class="w-full px-4 py-3 text-sm rounded-md border border-yellow-500/30 focus:outline-none focus:border-yellow-500" style="background-color: var(--input-bg);">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase mb-1" data-i18n="formService">Interested Service</label>
+                            <select id="formService" class="w-full px-4 py-3 text-sm rounded-md border border-yellow-500/30 focus:outline-none focus:border-yellow-500" style="background-color: var(--input-bg);">
+                                <option value="Full Home Interior">Full Home Interior</option>
+                                <option value="Modular Kitchen">Modular Kitchen</option>
+                                <option value="Commercial Office">Commercial / Office</option>
+                                <option value="Renovation">Renovation / Remodeling</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase mb-1" data-i18n="formMsg">Your Requirements</label>
+                            <textarea id="formMsg" rows="4" placeholder="Tell us about carpet area, timeline, style preferences..." class="w-full px-4 py-3 text-sm rounded-md border border-yellow-500/30 focus:outline-none focus:border-yellow-500" style="background-color: var(--input-bg);"></textarea>
+                        </div>
+
+                        <button type="submit" class="gold-btn w-full py-4 rounded-md uppercase font-semibold text-xs tracking-wider" data-i18n="formSubmit">
+                            Send Enquiry
+                        </button>
+
+                        <div id="formAlert" class="hidden p-3 rounded text-center text-xs font-semibold bg-green-900/60 text-green-300 border border-green-500">
+                            Thank you! Your enquiry has been sent. We will call you back shortly.
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t" style="background-color: var(--bg-secondary); border-color: var(--border-color);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-xs">
+                
+                <div class="space-y-3">
+                    <span class="block font-cinzel text-lg font-bold gold-text">RN INTERIORS</span>
+                    <p class="text-gray-400 leading-relaxed" data-i18n="footerTagline">Transforming spaces, enriching lives. Premier interior studio curated by Vaishnavi.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold font-cinzel uppercase text-sm mb-4 text-amber-500" data-i18n="quickLinks">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#home" class="hover:underline">Home</a></li>
+                        <li><a href="#about" class="hover:underline">About Us</a></li>
+                        <li><a href="#services" class="hover:underline">Services</a></li>
+                        <li><a href="#projects" class="hover:underline">Projects</a></li>
+                        <li><a href="#gallery" class="hover:underline">Gallery</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold font-cinzel uppercase text-sm mb-4 text-amber-500" data-i18n="ourServices">Our Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Residential Interiors</li>
+                        <li>Modular Kitchens</li>
+                        <li>Turnkey Contracts</li>
+                        <li>Office Architecture</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold font-cinzel uppercase text-sm mb-4 text-amber-500" data-i18n="connect">Connect With Us</h4>
+                    <div class="flex space-x-3 text-lg mb-4">
+                        <a href="#" class="w-8 h-8 rounded-full border border-yellow-600/40 flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-yellow-600/40 flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-yellow-600/40 flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-colors"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <p class="text-gray-400">Contact: +91 7038693016</p>
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-2">
+                <span>© 2026 RN Interiors by Vaishnavi. All rights reserved.</span>
+                <span data-i18n="builtWith">Designed for Luxury Living</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
+        <a href="
