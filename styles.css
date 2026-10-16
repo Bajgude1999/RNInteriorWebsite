@@ -77,7 +77,7 @@
     --shadow-color: rgba(10, 10, 10, 0.05);
     --accent: #D99052;
     --accent-hover: #B86E32;
-    --greige: #D8D0C5;
+    --greige: #7A7268;
     
     /* Interactive Button System */
     --btn-primary-bg: #D99052;
@@ -267,6 +267,55 @@ h1, h2, h3, h4, .font-heading {
     display: flex;
 }
 
+/* Featured Projects Slideshow Modal */
+.project-slideshow-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    background-color: rgba(10, 10, 10, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-slideshow-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.slideshow-card {
+    transform: scale(0.96) translateY(12px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-slideshow-modal.active .slideshow-card {
+    transform: scale(1) translateY(0);
+}
+
+.slideshow-main-img {
+    transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+.slideshow-thumb {
+    transition: all 0.22s ease;
+    cursor: pointer;
+    opacity: 0.55;
+}
+
+.slideshow-thumb:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.slideshow-thumb.active {
+    opacity: 1;
+    border-color: #D99052 !important;
+    box-shadow: 0 0 14px rgba(217, 144, 82, 0.5);
+    transform: translateY(-2px);
+}
+
 /* Smooth Carousel Transitions */
 .carousel-item {
     display: none;
@@ -316,4 +365,357 @@ h1, h2, h3, h4, .font-heading {
 
 .pulse-accent {
     animation: subtle-pulse 3s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   Sharp Vector Icon Rendering (Anti-Blur System)
+   ========================================================================== */
+i.fas, i.fab, i.far, i.fa {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    display: inline-block;
+    line-height: 1;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* ==========================================================================
+   Services Section Category-Specific Vibrant Badges
+   ========================================================================== */
+.service-icon-box {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 1.5rem;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* 1. Residential Interiors: Copper / Terracotta */
+.service-icon-residential {
+    background: rgba(217, 144, 82, 0.14);
+    border: 1px solid rgba(217, 144, 82, 0.40);
+    color: #D99052;
+}
+.group:hover .service-icon-residential {
+    background: #D99052;
+    border-color: #D99052;
+    color: #FFFFFF;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 10px 24px rgba(217, 144, 82, 0.45);
+}
+
+/* 2. Modular Kitchens: Warm Culinary Amber */
+.service-icon-kitchen {
+    background: rgba(245, 158, 11, 0.14);
+    border: 1px solid rgba(245, 158, 11, 0.40);
+    color: #F59E0B;
+}
+.group:hover .service-icon-kitchen {
+    background: #F59E0B;
+    border-color: #F59E0B;
+    color: #FFFFFF;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 10px 24px rgba(245, 158, 11, 0.45);
+}
+
+/* 3. Commercial & Offices: Modern Steel Blue */
+.service-icon-commercial {
+    background: rgba(56, 189, 248, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.40);
+    color: #0284C7;
+}
+[data-theme="dark"] .service-icon-commercial {
+    color: #38BDF8;
+}
+.group:hover .service-icon-commercial {
+    background: #0284C7;
+    border-color: #0284C7;
+    color: #FFFFFF;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 10px 24px rgba(2, 132, 199, 0.45);
+}
+
+/* 4. Turnkey Contracts: Luxury Gold */
+.service-icon-turnkey {
+    background: rgba(234, 179, 8, 0.14);
+    border: 1px solid rgba(234, 179, 8, 0.40);
+    color: #CA8A04;
+}
+[data-theme="dark"] .service-icon-turnkey {
+    color: #EAB308;
+}
+.group:hover .service-icon-turnkey {
+    background: #CA8A04;
+    border-color: #CA8A04;
+    color: #FFFFFF;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 10px 24px rgba(202, 138, 4, 0.45);
+}
+
+/* 5. Living & Bedroom Decor: Cozy Plum / Rose */
+.service-icon-living {
+    background: rgba(236, 72, 153, 0.14);
+    border: 1px solid rgba(236, 72, 153, 0.40);
+    color: #DB2777;
+}
+[data-theme="dark"] .service-icon-living {
+    color: #EC4899;
+}
+.group:hover .service-icon-living {
+    background: #DB2777;
+    border-color: #DB2777;
+    color: #FFFFFF;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 10px 24px rgba(219, 39, 119, 0.45);
+}
+
+/* 6. Renovation & Remodeling: Architectural Emerald */
+.service-icon-renovation {
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(16, 185, 129, 0.40);
+    color: #059669;
+}
+[data-theme="dark"] .service-icon-renovation {
+    color: #10B981;
+}
+.group:hover .service-icon-renovation {
+    background: #059669;
+    border-color: #059669;
+    color: #FFFFFF;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 10px 24px rgba(5, 150, 105, 0.45);
+}
+
+/* ==========================================================================
+   Footer Links & Authentic Social Buttons
+   ========================================================================== */
+.footer-link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.footer-link-item:hover {
+    color: var(--text-primary);
+    transform: translateX(4px);
+}
+
+.footer-link-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-link-item:hover .footer-link-icon {
+    transform: scale(1.16);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Authentic Social Buttons */
+.social-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* Instagram */
+.social-icon-instagram {
+    background: rgba(225, 48, 108, 0.14);
+    border: 1px solid rgba(225, 48, 108, 0.42);
+    color: #E1306C;
+}
+.social-icon-instagram:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    border-color: transparent;
+    color: #FFFFFF !important;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(225, 48, 108, 0.50);
+}
+
+/* Facebook */
+.social-icon-facebook {
+    background: rgba(24, 119, 242, 0.14);
+    border: 1px solid rgba(24, 119, 242, 0.42);
+    color: #1877F2;
+}
+.social-icon-facebook:hover {
+    background: #1877F2;
+    border-color: #1877F2;
+    color: #FFFFFF !important;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(24, 119, 242, 0.50);
+}
+
+/* WhatsApp */
+.social-icon-whatsapp {
+    background: rgba(37, 211, 102, 0.14);
+    border: 1px solid rgba(37, 211, 102, 0.42);
+    color: #25D366;
+}
+.social-icon-whatsapp:hover {
+    background: #25D366;
+    border-color: #25D366;
+    color: #FFFFFF !important;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.50);
+}
+
+/* Direct Phone */
+.social-icon-phone {
+    background: rgba(217, 144, 82, 0.14);
+    border: 1px solid rgba(217, 144, 82, 0.42);
+    color: #D99052;
+}
+.social-icon-phone:hover {
+    background: #D99052;
+    border-color: #D99052;
+    color: #FFFFFF !important;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(217, 144, 82, 0.50);
+}
+
+/* Email */
+.social-icon-email {
+    background: rgba(234, 67, 53, 0.14);
+    border: 1px solid rgba(234, 67, 53, 0.42);
+    color: #EA4335;
+}
+.social-icon-email:hover {
+    background: #EA4335;
+    border-color: #EA4335;
+    color: #FFFFFF !important;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(234, 67, 53, 0.50);
+}
+
+/* ==========================================================================
+   Brand Logo Dynamic Mode Switcher
+   ========================================================================== */
+.logo-dark {
+    display: none;
+}
+.logo-light {
+    display: block;
+}
+
+[data-theme="dark"] .logo-dark {
+    display: block !important;
+}
+[data-theme="dark"] .logo-light {
+    display: none !important;
+}
+
+[data-theme="light"] .logo-dark {
+    display: none !important;
+}
+[data-theme="light"] .logo-light {
+    display: block !important;
+}
+
+/* ==========================================================================
+   Header Action Controls (Theme Toggle & Language Selector UI)
+   ========================================================================== */
+#themeToggleBtn,
+#mobileThemeToggle,
+#mobileMenuBtn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+#themeToggleBtn i,
+#mobileThemeToggle i {
+    font-size: 13px;
+    transition: transform 0.3s ease;
+}
+
+#themeToggleBtn:hover i,
+#mobileThemeToggle:hover i {
+    transform: rotate(15deg) scale(1.1);
+}
+
+#langSelect,
+#mobileLangSelect {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-align-last: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-sizing: border-box;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+#langSelect:focus,
+#mobileLangSelect:focus {
+    outline: none;
+}
+
+#langSelect option,
+#mobileLangSelect option {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+/* Light mode contrast enhancements for greige utility classes */
+[data-theme="light"] .text-greige {
+    color: var(--greige);
+}
+
+[data-theme="light"] .border-greige\/40 {
+    border-color: rgba(122, 114, 104, 0.4);
+}
+
+/* Header Brand Logo (assets/logo.jpeg) Seamless Integration */
+.header-brand-logo {
+    mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .header-brand-logo {
+    filter: invert(1) hue-rotate(180deg) contrast(1.1);
+    mix-blend-mode: screen;
 }

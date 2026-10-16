@@ -319,8 +319,24 @@ function changeLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('selectedLanguage', lang);
     document.documentElement.lang = lang;
+
     const langSelect = document.getElementById('langSelect');
     if (langSelect) langSelect.value = lang;
+
+    const mobileLangSelect = document.getElementById('mobileLangSelect');
+    if (mobileLangSelect) mobileLangSelect.value = lang;
+
+    // Highlight active mobile button
+    ['en', 'mr', 'hi'].forEach(l => {
+        const btn = document.getElementById('mBtn' + l.charAt(0).toUpperCase() + l.slice(1));
+        if (btn) {
+            if (l === lang) {
+                btn.className = 'px-3 py-1.5 font-semibold bg-[#D99052] text-white border border-[#D99052] rounded-md transition-colors';
+            } else {
+                btn.className = 'px-3 py-1.5 font-semibold border border-greige/40 rounded-md hover:border-burntOrange hover:text-burntOrange transition-colors';
+            }
+        }
+    });
 
     const dict = translations[lang] || translations['en'];
     
@@ -357,11 +373,11 @@ function updateThemeIcons(theme) {
     const icon = document.getElementById('themeIcon');
     const mobileIcon = document.getElementById('mobileThemeIcon');
     if (theme === 'dark') {
-        if(icon) icon.className = 'fas fa-sun';
-        if(mobileIcon) mobileIcon.className = 'fas fa-sun text-sm';
+        if(icon) icon.className = 'fas fa-sun text-xs text-[#D99052]';
+        if(mobileIcon) mobileIcon.className = 'fas fa-sun text-xs text-[#D99052]';
     } else {
-        if(icon) icon.className = 'fas fa-moon';
-        if(mobileIcon) mobileIcon.className = 'fas fa-moon text-sm';
+        if(icon) icon.className = 'fas fa-moon text-xs';
+        if(mobileIcon) mobileIcon.className = 'fas fa-moon text-xs';
     }
 }
 
@@ -493,9 +509,309 @@ function handleFormSubmit(e) {
     }, 4000);
 }
 
+// Featured Projects Slideshow System
+const featuredProjectImages = [
+    {
+        file: 'assets/featured_project/1.png',
+        number: 1,
+        title: 'The Grand Regency Apartment – Living Area',
+        category: 'Residential Villa',
+        location: 'Baner, Pune',
+        desc: 'Baner, Pune — A 4BHK lavish residence featuring Italian marble flooring, ambient warm lighting, custom teak fluted accents, and floor-to-ceiling balcony glazing.',
+        projectIndex: 0
+    },
+    {
+        file: 'assets/featured_project/2.png',
+        number: 2,
+        title: 'Contemporary Master Bedroom Suite',
+        category: '2 BHK Luxury Bedroom',
+        location: 'Worli, Mumbai',
+        desc: 'Worli, Mumbai — Sleek upholstered platform bed with halo LED illumination, acoustic fluted timber headboard, and minimalist brass pendant fixtures.',
+        projectIndex: 1
+    },
+    {
+        file: 'assets/featured_project/3.png',
+        number: 3,
+        title: 'Premium 3 BHK Dining & Lounge',
+        category: '3 BHK Residential Interior',
+        location: 'Koregaon Park, Pune',
+        desc: 'Koregaon Park, Pune — Open-concept formal dining space connecting seamlessly to living area, calacatta marble table, illuminated credenza, and chevron oak floors.',
+        projectIndex: 0
+    },
+    {
+        file: 'assets/featured_project/4.png',
+        number: 4,
+        title: 'Opulent Modular Kitchen Studio',
+        category: 'Modular Kitchen',
+        location: 'Koregaon Park, Pune',
+        desc: 'Koregaon Park, Pune — Smart handle-less charcoal and matte oak cabinets, waterfall quartz island, built-in induction & oven, and warm golden task lighting.',
+        projectIndex: 2
+    },
+    {
+        file: 'assets/featured_project/5.png',
+        number: 5,
+        title: 'Minimalist Penthouse Bedroom & Wardrobe',
+        category: 'Luxury Residence',
+        location: 'Worli, Mumbai',
+        desc: 'Worli, Mumbai — Minimalist sanctuary featuring walk-in glass wardrobe enclosure, floating vanity console with backlit arc mirror, and warm microcement textures.',
+        projectIndex: 1
+    },
+    {
+        file: 'assets/featured_project/6.png',
+        number: 6,
+        title: 'Modern 1 BHK Apartment Living & Dining',
+        category: 'Compact Apartment',
+        location: 'Baner, Pune',
+        desc: 'Baner, Pune — Space-optimized bespoke cabinetry, integrated dining bench with fluted acoustic paneling, and bright balcony seating for effortless contemporary living.',
+        projectIndex: 0
+    }
+];
+
+let currentSlideshowIndex = 0;
+let slideshowTouchStartX = 0;
+let slideshowTouchEndX = 0;
+let slideshowAutoPlay = true;
+let slideshowTimer = null;
+let slideshowProgressInterval = null;
+let slideshowProgress = 0;
+const SLIDESHOW_DURATION_MS = 3800;
+const PROGRESS_STEP_MS = 50;
+
+function startSlideshowAutoPlay() {
+    slideshowAutoPlay = true;
+    updatePlayPauseUI();
+    resetAndStartTimer();
+}
+
+function pauseSlideshowAutoPlay() {
+    slideshowAutoPlay = false;
+    clearTimeout(slideshowTimer);
+    clearInterval(slideshowProgressInterval);
+    updatePlayPauseUI();
+    const bar = document.getElementById('slideshowProgressBar');
+    if (bar) bar.style.width = '0%';
+}
+
+function toggleSlideshowAutoPlay() {
+    if (slideshowAutoPlay) {
+        pauseSlideshowAutoPlay();
+    } else {
+        startSlideshowAutoPlay();
+    }
+}
+
+function updatePlayPauseUI() {
+    const icon = document.getElementById('slideshowPlayIcon');
+    const text = document.getElementById('slideshowPlayText');
+    const btn = document.getElementById('slideshowPlayBtn');
+    if (icon && text) {
+        if (slideshowAutoPlay) {
+            icon.className = 'fas fa-pause text-[10px] text-burntOrange';
+            text.innerText = 'AUTO';
+            text.className = 'text-[11px] font-medium tracking-wider text-burntOrange';
+            if (btn) btn.classList.add('border-burntOrange/60');
+        } else {
+            icon.className = 'fas fa-play text-[10px] text-greige';
+            text.innerText = 'PLAY';
+            text.className = 'text-[11px] font-medium tracking-wider text-greige';
+            if (btn) btn.classList.remove('border-burntOrange/60');
+        }
+    }
+}
+
+function resetAndStartTimer() {
+    clearTimeout(slideshowTimer);
+    clearInterval(slideshowProgressInterval);
+    
+    if (!slideshowAutoPlay) return;
+
+    slideshowProgress = 0;
+    const bar = document.getElementById('slideshowProgressBar');
+    if (bar) bar.style.width = '0%';
+
+    const totalSteps = SLIDESHOW_DURATION_MS / PROGRESS_STEP_MS;
+    slideshowProgressInterval = setInterval(() => {
+        if (!slideshowAutoPlay) {
+            clearInterval(slideshowProgressInterval);
+            return;
+        }
+        slideshowProgress += (100 / totalSteps);
+        if (bar) bar.style.width = `${Math.min(100, slideshowProgress)}%`;
+    }, PROGRESS_STEP_MS);
+
+    slideshowTimer = setTimeout(() => {
+        if (slideshowAutoPlay) {
+            nextProjectImage(true);
+        }
+    }, SLIDESHOW_DURATION_MS);
+}
+
+function openProjectSlideshow(startIndex = 0) {
+    currentSlideshowIndex = (typeof startIndex === 'number' && startIndex >= 0 && startIndex < featuredProjectImages.length) ? startIndex : 0;
+    renderSlideshowImage(currentSlideshowIndex);
+    renderSlideshowThumbnails();
+    
+    const modal = document.getElementById('projectSlideshowModal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    startSlideshowAutoPlay();
+}
+
+function closeProjectSlideshow() {
+    pauseSlideshowAutoPlay();
+    const modal = document.getElementById('projectSlideshowModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    const projectsSec = document.getElementById('projects');
+    if (projectsSec) {
+        projectsSec.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function handleSlideshowBackdropClick(e) {
+    if (e.target && e.target.id === 'projectSlideshowModal') {
+        closeProjectSlideshow();
+    }
+}
+
+function setSlideshowIndex(index) {
+    if (index >= 0 && index < featuredProjectImages.length) {
+        currentSlideshowIndex = index;
+        renderSlideshowImage(currentSlideshowIndex);
+        updateActiveThumbnail();
+        if (slideshowAutoPlay) resetAndStartTimer();
+    }
+}
+
+function prevProjectImage() {
+    currentSlideshowIndex = (currentSlideshowIndex - 1 + featuredProjectImages.length) % featuredProjectImages.length;
+    renderSlideshowImage(currentSlideshowIndex);
+    updateActiveThumbnail();
+    if (slideshowAutoPlay) resetAndStartTimer();
+}
+
+function nextProjectImage(fromAuto = false) {
+    currentSlideshowIndex = (currentSlideshowIndex + 1) % featuredProjectImages.length;
+    renderSlideshowImage(currentSlideshowIndex);
+    updateActiveThumbnail();
+    if (slideshowAutoPlay) resetAndStartTimer();
+}
+
+function renderSlideshowImage(index) {
+    const item = featuredProjectImages[index];
+    if (!item) return;
+
+    const img = document.getElementById('slideshowImg');
+    const badge = document.getElementById('slideshowBadge');
+    const counter = document.getElementById('slideshowCounter');
+    const title = document.getElementById('slideshowTitle');
+    const category = document.getElementById('slideshowCategory');
+    const loc = document.getElementById('slideshowLoc');
+    const desc = document.getElementById('slideshowDesc');
+    const filename = document.getElementById('slideshowFilename');
+
+    if (img) {
+        img.style.opacity = '0.25';
+        img.style.transform = 'scale(0.985)';
+        setTimeout(() => {
+            img.src = item.file;
+            img.alt = item.title;
+            img.style.opacity = '1';
+            img.style.transform = 'scale(1)';
+        }, 120);
+    }
+
+    if (badge) badge.innerText = `Project ${item.projectIndex + 1}`;
+    if (counter) counter.innerText = `${index + 1} / ${featuredProjectImages.length}`;
+    if (title) title.innerText = item.title;
+    if (category) category.innerText = item.category.toUpperCase();
+    if (loc) loc.innerText = item.location;
+    if (desc) desc.innerText = item.desc;
+    if (filename) filename.innerText = item.file;
+}
+
+function renderSlideshowThumbnails() {
+    const container = document.getElementById('slideshowThumbnails');
+    if (!container) return;
+
+    container.innerHTML = '';
+    featuredProjectImages.forEach((item, i) => {
+        const thumb = document.createElement('button');
+        thumb.className = `slideshow-thumb w-14 h-10 sm:w-16 sm:h-11 rounded-md overflow-hidden border-2 transition-all shrink-0 cursor-pointer ${i === currentSlideshowIndex ? 'active border-burntOrange' : 'border-white/20'}`;
+        thumb.setAttribute('aria-label', `View image ${i + 1}`);
+        thumb.onclick = () => setSlideshowIndex(i);
+        
+        const img = document.createElement('img');
+        img.src = item.file;
+        img.alt = `Thumbnail ${i + 1}`;
+        img.className = 'w-full h-full object-cover pointer-events-none';
+        
+        thumb.appendChild(img);
+        container.appendChild(thumb);
+    });
+}
+
+function updateActiveThumbnail() {
+    const thumbs = document.querySelectorAll('.slideshow-thumb');
+    thumbs.forEach((thumb, i) => {
+        if (i === currentSlideshowIndex) {
+            thumb.classList.add('active', 'border-burntOrange');
+            thumb.classList.remove('border-white/20');
+            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+            thumb.classList.remove('active', 'border-burntOrange');
+            thumb.classList.add('border-white/20');
+        }
+    });
+}
+
+// Keyboard Navigation (ArrowLeft, ArrowRight, Escape, Spacebar)
+document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('projectSlideshowModal');
+    if (!modal || !modal.classList.contains('active')) return;
+
+    if (e.key === 'ArrowLeft') {
+        prevProjectImage();
+    } else if (e.key === 'ArrowRight') {
+        nextProjectImage();
+    } else if (e.key === 'Escape') {
+        closeProjectSlideshow();
+    } else if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        toggleSlideshowAutoPlay();
+    }
+});
+
+// Mobile Touch Swipe Handling
+function initSlideshowTouch() {
+    const viewport = document.getElementById('slideshowViewport');
+    if (!viewport) return;
+
+    viewport.addEventListener('touchstart', (e) => {
+        slideshowTouchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (e) => {
+        slideshowTouchEndX = e.changedTouches[0].screenX;
+        const diff = slideshowTouchEndX - slideshowTouchStartX;
+        if (Math.abs(diff) > 40) {
+            if (diff < 0) {
+                nextProjectImage();
+            } else {
+                prevProjectImage();
+            }
+        }
+    }, { passive: true });
+}
+
 window.onload = function() {
     initTheme();
     changeLanguage(currentLang);
     startAutoPlay();
     initBeforeAfter();
+    initSlideshowTouch();
 };

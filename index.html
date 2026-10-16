@@ -65,7 +65,7 @@
         }
     </script>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -73,76 +73,73 @@
     <!-- Sticky Header -->
     <header class="sticky top-0 z-50 transition-colors duration-300 backdrop-blur-md"
         style="background-color: var(--header-bg); border-bottom: 1px solid var(--border-color);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
 
-                <!-- Brand Logo & Name -->
-                <a href="#home" class="flex items-center gap-3 group">
-                    <div
-                        class="w-11 h-11 rounded-full border border-greige/40 flex items-center justify-center bg-[#0A0A0A] overflow-hidden shadow-sm">
-                        <span class="font-cinzel text-lg font-semibold text-warmWhite">RN</span>
-                    </div>
-                    <div>
-                        <span
-                            class="block font-cinzel text-base sm:text-lg font-semibold tracking-[0.16em] text-current">RN
-                            INTERIORS</span>
-                        <span class="block text-[10px] tracking-[0.26em] text-greige-dark font-sans uppercase">by
-                            Vaishnavi</span>
-                    </div>
+                <!-- 1. Brand Logo (Left Top Corner - assets/logo.jpeg) -->
+                <a href="#home" class="flex items-center shrink-0 group focus:outline-none py-1" aria-label="RN Interiors by Vaishnavi">
+                    <img src="assets/logo.jpeg" alt="RN Interiors by Vaishnavi"
+                        class="h-11 sm:h-12 md:h-13 lg:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 header-brand-logo">
                 </a>
 
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden lg:flex items-center space-x-7 text-xs uppercase tracking-widest font-medium">
-                    <a href="#home" class="hover:text-burntOrange transition-colors duration-200" data-i18n="home">Home</a>
-                    <a href="#about" class="hover:text-burntOrange transition-colors duration-200" data-i18n="about">About
-                        Us</a>
-                    <a href="#services" class="hover:text-burntOrange transition-colors duration-200"
-                        data-i18n="services">Services</a>
-                    <a href="#projects" class="hover:text-burntOrange transition-colors duration-200"
-                        data-i18n="projects">Projects</a>
-                    <a href="#gallery" class="hover:text-burntOrange transition-colors duration-200"
-                        data-i18n="gallery">Gallery</a>
-                    <a href="#process" class="hover:text-burntOrange transition-colors duration-200"
-                        data-i18n="process">Process</a>
-                    <a href="#locations" class="hover:text-burntOrange transition-colors duration-200"
-                        data-i18n="locations">Locations</a>
-                    <a href="#contact" class="hover:text-burntOrange transition-colors duration-200"
-                        data-i18n="contact">Contact</a>
+                <!-- 4. Desktop Navigation Links (Single-line About Us, flexible non-overlapping gaps) -->
+                <nav class="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-7 text-xs uppercase tracking-wider xl:tracking-widest font-medium flex-nowrap">
+                    <a href="#home" class="whitespace-nowrap shrink-0 hover:text-burntOrange transition-colors duration-200" data-i18n="home">Home</a>
+                    <a href="#about" class="whitespace-nowrap shrink-0 hover:text-burntOrange transition-colors duration-200" data-i18n="about">About Us</a>
+                    <a href="#services" class="whitespace-nowrap shrink-0 hover:text-burntOrange transition-colors duration-200" data-i18n="services">Services</a>
+                    <a href="#projects" class="whitespace-nowrap shrink-0 hover:text-burntOrange transition-colors duration-200" data-i18n="projects">Projects</a>
+                    <a href="#gallery" class="whitespace-nowrap shrink-0 hover:text-burntOrange transition-colors duration-200" data-i18n="gallery">Gallery</a>
+                    <a href="#process" class="whitespace-nowrap shrink-0 hover:text-burntOrange transition-colors duration-200" data-i18n="process">Process</a>
+                    <a href="#locations" class="whitespace-nowrap shrink-0 hover:text-burntOrange transition-colors duration-200" data-i18n="locations">Locations</a>
+                    <a href="#contact" class="whitespace-nowrap shrink-0 hover:text-burntOrange transition-colors duration-200" data-i18n="contact">Contact</a>
                 </nav>
 
-                <!-- Actions: Language Select, Theme Toggle & Quote CTA -->
-                <div class="hidden md:flex items-center space-x-4">
+                <!-- 2 & 3. Actions: Language Select (EN, म, हिं) & Theme Toggle (Visually Consistent Circular Buttons) -->
+                <div class="hidden md:flex items-center gap-2.5 lg:gap-3 shrink-0">
                     <!-- Language Selector -->
-                    <div class="relative">
-                        <select id="langSelect" onchange="changeLanguage(this.value)"
-                            class="bg-transparent border border-greige/40 rounded px-2.5 py-1.5 text-xs focus:outline-none focus:border-burntOrange cursor-pointer text-current">
-                            <option value="en" class="bg-[#0A0A0A] text-[#FCFCFC]">EN</option>
-                            <option value="mr" class="bg-[#0A0A0A] text-[#FCFCFC]">मराठी</option>
-                            <option value="hi" class="bg-[#0A0A0A] text-[#FCFCFC]">हिन्दी</option>
-                        </select>
-                    </div>
+                    <select id="langSelect" onchange="changeLanguage(this.value)"
+                        class="p-2 border border-greige/40 rounded-full hover:border-burntOrange text-greige hover:text-burntOrange transition-colors"
+                        title="Select Language" aria-label="Select Language">
+                        <option value="en">EN</option>
+                        <option value="mr">म</option>
+                        <option value="hi">हिं</option>
+                    </select>
 
                     <!-- Day/Night Mode Toggle -->
                     <button id="themeToggleBtn" onclick="toggleTheme()"
                         class="p-2 border border-greige/40 rounded-full hover:border-burntOrange text-greige hover:text-burntOrange transition-colors"
-                        title="Toggle Mode">
-                        <i id="themeIcon" class="fas fa-moon"></i>
+                        title="Toggle Theme" aria-label="Toggle Theme">
+                        <i id="themeIcon" class="fas fa-moon text-xs"></i>
                     </button>
 
                     <!-- Get Quote Button -->
-                    <a href="#contact" class="primary-btn px-4 py-2 rounded-sm text-xs uppercase tracking-wider"
+                    <a href="#contact" class="primary-btn h-9 px-4 rounded-lg text-xs uppercase tracking-wider font-semibold whitespace-nowrap hidden sm:inline-flex items-center justify-center"
                         data-i18n="getQuote">Get a Quote</a>
                 </div>
 
-                <!-- Mobile Hamburger Button -->
-                <div class="flex items-center gap-3 lg:hidden">
+                <!-- 5. Mobile Header Controls -->
+                <div class="flex items-center gap-2 lg:hidden shrink-0">
+                    <!-- Mobile Language Selector -->
+                    <select id="mobileLangSelect" onchange="changeLanguage(this.value)"
+                        class="p-2 border border-greige/40 rounded-full hover:border-burntOrange text-greige hover:text-burntOrange transition-colors sm:hidden"
+                        title="Select Language" aria-label="Select Language">
+                        <option value="en">EN</option>
+                        <option value="mr">म</option>
+                        <option value="hi">हिं</option>
+                    </select>
+
+                    <!-- Mobile Theme Toggle -->
                     <button id="mobileThemeToggle" onclick="toggleTheme()"
-                        class="p-1.5 border border-greige/40 rounded-full text-greige hover:border-burntOrange hover:text-burntOrange transition-colors">
-                        <i id="mobileThemeIcon" class="fas fa-moon text-sm"></i>
+                        class="p-2 border border-greige/40 rounded-full hover:border-burntOrange text-greige hover:text-burntOrange transition-colors"
+                        title="Toggle Mode" aria-label="Toggle Mode">
+                        <i id="mobileThemeIcon" class="fas fa-moon text-xs"></i>
                     </button>
+
+                    <!-- Mobile Hamburger Button -->
                     <button id="mobileMenuBtn" onclick="toggleMobileMenu()"
-                        class="p-2 text-xl focus:outline-none text-greige hover:text-burntOrange transition-colors" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
+                        class="p-2 border border-greige/40 rounded-full hover:border-burntOrange text-greige hover:text-burntOrange transition-colors"
+                        aria-label="Toggle navigation">
+                        <i class="fas fa-bars text-sm"></i>
                     </button>
                 </div>
             </div>
@@ -152,21 +149,23 @@
         <div id="mobileMenu" class="hidden lg:hidden px-4 pt-3 pb-6 space-y-3 transition-all border-t"
             style="background-color: var(--bg-secondary); border-color: var(--border-color);">
             <div class="flex justify-between items-center py-2 border-b" style="border-color: var(--border-color);">
-                <span class="text-xs font-medium tracking-widest text-greige-dark uppercase">LANGUAGE</span>
+                <span class="text-xs font-medium tracking-widest text-greige-dark uppercase flex items-center gap-1.5">
+                    <i class="fas fa-globe text-burntOrange text-xs"></i> LANGUAGE
+                </span>
                 <div class="flex space-x-2 text-xs">
-                    <button onclick="changeLanguage('en')"
-                        class="px-2.5 py-1 border border-greige/40 rounded hover:border-burntOrange hover:text-burntOrange">EN</button>
-                    <button onclick="changeLanguage('mr')"
-                        class="px-2.5 py-1 border border-greige/40 rounded hover:border-burntOrange hover:text-burntOrange">मराठी</button>
-                    <button onclick="changeLanguage('hi')"
-                        class="px-2.5 py-1 border border-greige/40 rounded hover:border-burntOrange hover:text-burntOrange">हिन्दी</button>
+                    <button id="mBtnEn" onclick="changeLanguage('en')"
+                        class="px-3 py-1.5 font-semibold border border-greige/40 rounded-md hover:border-burntOrange hover:text-burntOrange transition-colors">EN</button>
+                    <button id="mBtnMr" onclick="changeLanguage('mr')"
+                        class="px-3 py-1.5 font-semibold border border-greige/40 rounded-md hover:border-burntOrange hover:text-burntOrange transition-colors">म</button>
+                    <button id="mBtnHi" onclick="changeLanguage('hi')"
+                        class="px-3 py-1.5 font-semibold border border-greige/40 rounded-md hover:border-burntOrange hover:text-burntOrange transition-colors">हिं</button>
                 </div>
             </div>
             <a href="#home" onclick="toggleMobileMenu()"
                 class="block py-2 text-sm font-medium hover:text-burntOrange uppercase tracking-wider transition-colors"
                 data-i18n="home">Home</a>
             <a href="#about" onclick="toggleMobileMenu()"
-                class="block py-2 text-sm font-medium hover:text-burntOrange uppercase tracking-wider transition-colors"
+                class="block py-2 text-sm font-medium hover:text-burntOrange uppercase tracking-wider transition-colors whitespace-nowrap"
                 data-i18n="about">About Us</a>
             <a href="#services" onclick="toggleMobileMenu()"
                 class="block py-2 text-sm font-medium hover:text-burntOrange uppercase tracking-wider transition-colors"
@@ -287,7 +286,7 @@
 
                     <div class="grid grid-cols-2 gap-5 pt-4">
                         <div class="flex items-start gap-3">
-                            <i class="fas fa-gem text-lg text-greige mt-1 shrink-0"></i>
+                            <i class="fas fa-gem text-lg text-[#D99052] mt-1 shrink-0"></i>
                             <div>
                                 <h4 class="font-medium text-sm font-cinzel" data-i18n="pillar1Title">Uncompromised
                                     Luxury</h4>
@@ -296,7 +295,7 @@
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i class="fas fa-drafting-compass text-lg text-greige mt-1 shrink-0"></i>
+                            <i class="fas fa-drafting-compass text-lg text-[#0284C7] dark:text-[#38BDF8] mt-1 shrink-0"></i>
                             <div>
                                 <h4 class="font-medium text-sm font-cinzel" data-i18n="pillar2Title">Customized Design
                                 </h4>
@@ -305,7 +304,7 @@
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i class="fas fa-clock text-lg text-greige mt-1 shrink-0"></i>
+                            <i class="fas fa-clock text-lg text-[#F59E0B] mt-1 shrink-0"></i>
                             <div>
                                 <h4 class="font-medium text-sm font-cinzel" data-i18n="pillar3Title">On-Time Execution
                                 </h4>
@@ -314,7 +313,7 @@
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i class="fas fa-handshake text-lg text-greige mt-1 shrink-0"></i>
+                            <i class="fas fa-handshake text-lg text-[#10B981] mt-1 shrink-0"></i>
                             <div>
                                 <h4 class="font-medium text-sm font-cinzel" data-i18n="pillar4Title">Transparent Pricing
                                 </h4>
@@ -358,8 +357,7 @@
 
                 <div class="theme-card p-8 rounded-lg flex flex-col justify-between group">
                     <div>
-                        <div
-                            class="w-12 h-12 rounded bg-greige/10 border border-greige/25 flex items-center justify-center text-greige text-xl mb-6 group-hover:border-greige transition-colors">
+                        <div class="service-icon-box service-icon-residential">
                             <i class="fas fa-couch"></i>
                         </div>
                         <h3 class="text-lg font-medium font-cinzel mb-3" data-i18n="s1Title">Residential Interiors</h3>
@@ -368,14 +366,15 @@
                             furnishings.</p>
                     </div>
                     <a href="#contact"
-                        class="text-xs uppercase tracking-wider font-medium text-greige hover:text-warmWhite flex items-center gap-2 transition-colors"
-                        data-i18n="learnMore">Learn More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        class="text-xs uppercase tracking-wider font-semibold text-burntOrange hover:underline flex items-center gap-2 transition-colors">
+                        <span data-i18n="learnMore">Learn More</span>
+                        <i class="fas fa-arrow-right text-[11px] group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
 
                 <div class="theme-card p-8 rounded-lg flex flex-col justify-between group">
                     <div>
-                        <div
-                            class="w-12 h-12 rounded bg-greige/10 border border-greige/25 flex items-center justify-center text-greige text-xl mb-6 group-hover:border-greige transition-colors">
+                        <div class="service-icon-box service-icon-kitchen">
                             <i class="fas fa-utensils"></i>
                         </div>
                         <h3 class="text-lg font-medium font-cinzel mb-3" data-i18n="s2Title">Modular Kitchens</h3>
@@ -384,14 +383,15 @@
                             finishes.</p>
                     </div>
                     <a href="#contact"
-                        class="text-xs uppercase tracking-wider font-medium text-greige hover:text-warmWhite flex items-center gap-2 transition-colors"
-                        data-i18n="learnMore">Learn More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        class="text-xs uppercase tracking-wider font-semibold text-burntOrange hover:underline flex items-center gap-2 transition-colors">
+                        <span data-i18n="learnMore">Learn More</span>
+                        <i class="fas fa-arrow-right text-[11px] group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
 
                 <div class="theme-card p-8 rounded-lg flex flex-col justify-between group">
                     <div>
-                        <div
-                            class="w-12 h-12 rounded bg-greige/10 border border-greige/25 flex items-center justify-center text-greige text-xl mb-6 group-hover:border-greige transition-colors">
+                        <div class="service-icon-box service-icon-commercial">
                             <i class="fas fa-building"></i>
                         </div>
                         <h3 class="text-lg font-medium font-cinzel mb-3" data-i18n="s3Title">Commercial & Offices</h3>
@@ -399,31 +399,32 @@
                             workspace design engineered for productivity, brand image, and acoustic efficiency.</p>
                     </div>
                     <a href="#contact"
-                        class="text-xs uppercase tracking-wider font-medium text-greige hover:text-warmWhite flex items-center gap-2 transition-colors"
-                        data-i18n="learnMore">Learn More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        class="text-xs uppercase tracking-wider font-semibold text-burntOrange hover:underline flex items-center gap-2 transition-colors">
+                        <span data-i18n="learnMore">Learn More</span>
+                        <i class="fas fa-arrow-right text-[11px] group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
 
                 <div class="theme-card p-8 rounded-lg flex flex-col justify-between group">
                     <div>
-                        <div
-                            class="w-12 h-12 rounded bg-greige/10 border border-greige/25 flex items-center justify-center text-greige text-xl mb-6 group-hover:border-greige transition-colors">
+                        <div class="service-icon-box service-icon-turnkey">
                             <i class="fas fa-key"></i>
                         </div>
-                        <h3 class="text-lg font-medium font-cinzel mb-3" data-i18n="s4Title">Turnkey Interior Solutions
-                        </h3>
+                        <h3 class="text-lg font-medium font-cinzel mb-3" data-i18n="s4Title">Turnkey Interior Solutions</h3>
                         <p class="text-xs opacity-75 leading-relaxed mb-6 font-light" data-i18n="s4Desc">End-to-end
                             management from civil work, ceiling, wiring, and carpentry to final deep cleaning and
                             handover.</p>
                     </div>
                     <a href="#contact"
-                        class="text-xs uppercase tracking-wider font-medium text-greige hover:text-warmWhite flex items-center gap-2 transition-colors"
-                        data-i18n="learnMore">Learn More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        class="text-xs uppercase tracking-wider font-semibold text-burntOrange hover:underline flex items-center gap-2 transition-colors">
+                        <span data-i18n="learnMore">Learn More</span>
+                        <i class="fas fa-arrow-right text-[11px] group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
 
                 <div class="theme-card p-8 rounded-lg flex flex-col justify-between group">
                     <div>
-                        <div
-                            class="w-12 h-12 rounded bg-greige/10 border border-greige/25 flex items-center justify-center text-greige text-xl mb-6 group-hover:border-greige transition-colors">
+                        <div class="service-icon-box service-icon-living">
                             <i class="fas fa-bed"></i>
                         </div>
                         <h3 class="text-lg font-medium font-cinzel mb-3" data-i18n="s5Title">Living & Bedroom Decor</h3>
@@ -432,25 +433,26 @@
                             wardrobes.</p>
                     </div>
                     <a href="#contact"
-                        class="text-xs uppercase tracking-wider font-medium text-greige hover:text-warmWhite flex items-center gap-2 transition-colors"
-                        data-i18n="learnMore">Learn More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        class="text-xs uppercase tracking-wider font-semibold text-burntOrange hover:underline flex items-center gap-2 transition-colors">
+                        <span data-i18n="learnMore">Learn More</span>
+                        <i class="fas fa-arrow-right text-[11px] group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
 
                 <div class="theme-card p-8 rounded-lg flex flex-col justify-between group">
                     <div>
-                        <div
-                            class="w-12 h-12 rounded bg-greige/10 border border-greige/25 flex items-center justify-center text-greige text-xl mb-6 group-hover:border-greige transition-colors">
+                        <div class="service-icon-box service-icon-renovation">
                             <i class="fas fa-tools"></i>
                         </div>
-                        <h3 class="text-lg font-medium font-cinzel mb-3" data-i18n="s6Title">Renovation & Remodeling
-                        </h3>
+                        <h3 class="text-lg font-medium font-cinzel mb-3" data-i18n="s6Title">Renovation & Remodeling</h3>
                         <p class="text-xs opacity-75 leading-relaxed mb-6 font-light" data-i18n="s6Desc">Transform
-                            existing homes into modern luxury habitats with upgraded layouts and high-grade finishes.
-                        </p>
+                            existing homes into modern luxury habitats with upgraded layouts and high-grade finishes.</p>
                     </div>
                     <a href="#contact"
-                        class="text-xs uppercase tracking-wider font-medium text-greige hover:text-warmWhite flex items-center gap-2 transition-colors"
-                        data-i18n="learnMore">Learn More <i class="fas fa-arrow-right text-[10px]"></i></a>
+                        class="text-xs uppercase tracking-wider font-semibold text-burntOrange hover:underline flex items-center gap-2 transition-colors">
+                        <span data-i18n="learnMore">Learn More</span>
+                        <i class="fas fa-arrow-right text-[11px] group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
 
             </div>
@@ -487,8 +489,8 @@
                 class="relative overflow-hidden rounded-xl border border-greige/25 shadow-2xl min-h-[460px]">
 
                 <div class="carousel-item active relative w-full h-[520px]">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600"
-                        class="w-full h-full object-cover" alt="Luxury Villa Interior">
+                    <img src="assets/featured_project/1.png"
+                        class="w-full h-full object-cover" alt="The Grand Regency Apartment">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/45 to-transparent p-8 sm:p-12 flex flex-col justify-end">
                         <span class="text-xs uppercase tracking-[0.2em] text-greige font-medium mb-2"
@@ -499,15 +501,15 @@
                             Baner, Pune — A 4BHK lavish residence featuring Italian marble flooring, ambient warm
                             lighting, and custom teak wood accents.</p>
                         <button
-                            onclick="openLightbox('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600', 'The Grand Regency Apartment', 'Baner, Pune')"
+                            onclick="openProjectSlideshow(0)"
                             class="primary-btn w-fit px-6 py-2.5 rounded-sm text-xs uppercase tracking-wider"
                             data-i18n="viewProject">View Project</button>
                     </div>
                 </div>
 
                 <div class="carousel-item relative w-full h-[520px]">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1600"
-                        class="w-full h-full object-cover" alt="Modern Living Room">
+                    <img src="assets/featured_project/2.png"
+                        class="w-full h-full object-cover" alt="Minimalist Penthouse Living">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/45 to-transparent p-8 sm:p-12 flex flex-col justify-end">
                         <span class="text-xs uppercase tracking-[0.2em] text-greige font-medium mb-2"
@@ -518,15 +520,15 @@
                             Worli, Mumbai — Sleek monochrome hues accented with warm greige and burnt copper details with modular ceiling
                             profiles.</p>
                         <button
-                            onclick="openLightbox('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1600', 'Minimalist Penthouse Living', 'Worli, Mumbai')"
+                            onclick="openProjectSlideshow(1)"
                             class="primary-btn w-fit px-6 py-2.5 rounded-sm text-xs uppercase tracking-wider"
                             data-i18n="viewProject">View Project</button>
                     </div>
                 </div>
 
                 <div class="carousel-item relative w-full h-[520px]">
-                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1600"
-                        class="w-full h-full object-cover" alt="Modular Kitchen">
+                    <img src="assets/featured_project/4.png"
+                        class="w-full h-full object-cover" alt="Opulent Kitchen Studio">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/45 to-transparent p-8 sm:p-12 flex flex-col justify-end">
                         <span class="text-xs uppercase tracking-[0.2em] text-greige font-medium mb-2"
@@ -537,7 +539,7 @@
                             Koregaon Park, Pune — Smart handle-less cabinets, quartz countertops, and integrated Blum
                             fittings.</p>
                         <button
-                            onclick="openLightbox('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1600', 'Opulent Kitchen Studio', 'Koregaon Park, Pune')"
+                            onclick="openProjectSlideshow(3)"
                             class="primary-btn w-fit px-6 py-2.5 rounded-sm text-xs uppercase tracking-wider"
                             data-i18n="viewProject">View Project</button>
                     </div>
@@ -555,6 +557,98 @@
             </div>
         </div>
     </section>
+
+    <!-- Featured Projects Slideshow Modal -->
+    <div id="projectSlideshowModal" class="project-slideshow-modal justify-center items-center p-3 sm:p-6"
+        role="dialog" aria-modal="true" aria-labelledby="slideshowTitle"
+        onclick="handleSlideshowBackdropClick(event)">
+        <div class="slideshow-card relative max-w-5xl w-full bg-[#0A0A0A] border border-greige/30 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh]">
+            
+            <!-- Modal Header Bar -->
+            <div class="px-5 py-3.5 bg-[#121212] border-b border-greige/20 flex items-center justify-between z-20">
+                <div class="flex items-center gap-2.5 sm:gap-3.5">
+                    <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-burntOrange/15 text-burntOrange border border-burntOrange/30"
+                        id="slideshowBadge">Project 1</span>
+                    <span class="text-xs text-greige font-medium tracking-wider" id="slideshowCounter">1 / 6</span>
+
+                    <!-- Auto-play Toggle Button -->
+                    <button id="slideshowPlayBtn" onclick="toggleSlideshowAutoPlay()"
+                        class="h-7 px-2.5 rounded-full border border-greige/40 flex items-center gap-1.5 text-xs text-greige hover:border-burntOrange hover:text-burntOrange transition-colors cursor-pointer"
+                        aria-label="Pause auto slideshow" title="Play / Pause Auto-play (Spacebar)">
+                        <i id="slideshowPlayIcon" class="fas fa-pause text-[10px]"></i>
+                        <span id="slideshowPlayText" class="text-[11px] font-medium tracking-wider">AUTO</span>
+                    </button>
+                </div>
+                
+                <!-- Close Button -->
+                <button onclick="closeProjectSlideshow()"
+                    class="w-9 h-9 rounded-full border border-greige/40 flex items-center justify-center text-greige hover:border-burntOrange hover:text-burntOrange transition-colors cursor-pointer"
+                    aria-label="Close slideshow" title="Close (Esc)">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Auto-play Animated Progress Bar -->
+            <div class="w-full h-1 bg-white/10 relative overflow-hidden">
+                <div id="slideshowProgressBar" class="h-full bg-burntOrange transition-all duration-100 ease-linear" style="width: 0%;"></div>
+            </div>
+
+            <!-- Main Slide Viewing Area (16:9 large clear area with Navigation arrows) -->
+            <div id="slideshowViewport" class="relative aspect-[16/9] w-full bg-[#050505] overflow-hidden select-none">
+                <!-- Main Image -->
+                <img id="slideshowImg" src="assets/featured_project/1.png"
+                    class="slideshow-main-img w-full h-full object-cover"
+                    alt="Featured Project Interior Design">
+
+                <!-- Previous Arrow -->
+                <button onclick="prevProjectImage()"
+                    class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-greige/40 bg-[#0A0A0A]/75 backdrop-blur-md flex items-center justify-center text-warmWhite hover:bg-burntOrange hover:border-burntOrange hover:scale-105 transition-all z-20 shadow-lg cursor-pointer"
+                    aria-label="Previous image" title="Previous (Left Arrow)">
+                    <i class="fas fa-chevron-left text-sm"></i>
+                </button>
+
+                <!-- Next Arrow -->
+                <button onclick="nextProjectImage()"
+                    class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-greige/40 bg-[#0A0A0A]/75 backdrop-blur-md flex items-center justify-center text-warmWhite hover:bg-burntOrange hover:border-burntOrange hover:scale-105 transition-all z-20 shadow-lg cursor-pointer"
+                    aria-label="Next image" title="Next (Right Arrow)">
+                    <i class="fas fa-chevron-right text-sm"></i>
+                </button>
+
+                <!-- Sequence Filename Indicator -->
+                <div class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/70 backdrop-blur-sm border border-white/10 text-[10px] text-greige font-mono flex items-center gap-1.5">
+                    <i class="fas fa-image text-burntOrange text-[9px]"></i>
+                    <span id="slideshowFilename">assets/featured_project/1.png</span>
+                </div>
+            </div>
+
+            <!-- Information & Action Bar -->
+            <div class="p-5 sm:p-6 bg-[#121212] border-t border-greige/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span id="slideshowCategory" class="text-[11px] uppercase tracking-[0.2em] text-greige font-medium">RESIDENTIAL VILLA</span>
+                        <span class="text-greige/40">•</span>
+                        <span id="slideshowLoc" class="text-xs text-burntOrange font-semibold">Baner, Pune</span>
+                    </div>
+                    <h3 id="slideshowTitle" class="text-lg sm:text-2xl font-normal font-cinzel text-warmWhite">The Grand Regency Apartment</h3>
+                    <p id="slideshowDesc" class="text-xs sm:text-sm text-warmWhite/75 max-w-2xl font-light leading-relaxed">
+                        Baner, Pune — A 4BHK lavish residence featuring Italian marble flooring, ambient warm lighting, and custom teak wood accents.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 shrink-0">
+                    <a href="#contact" onclick="closeProjectSlideshow()"
+                        class="primary-btn px-5 py-2.5 rounded-sm text-xs uppercase tracking-wider whitespace-nowrap"
+                        data-i18n="getQuote">Enquire Now</a>
+                </div>
+            </div>
+
+            <!-- Sequential Thumbnail Bar (1.png to 6.png in exact numbered sequence) -->
+            <div class="px-5 py-3 bg-[#0A0A0A] border-t border-greige/15 overflow-x-auto flex items-center gap-2.5">
+                <div id="slideshowThumbnails" class="flex items-center gap-2.5 mx-auto">
+                    <!-- Thumbnails rendered sequentially by script -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Gallery Section -->
     <section id="gallery" class="py-24">
@@ -928,7 +1022,7 @@
                     <div class="space-y-6 text-sm">
                         <div class="flex items-start gap-4">
                             <div
-                                class="w-10 h-10 rounded-full bg-burntOrange/10 border border-burntOrange/20 flex items-center justify-center text-burntOrange shrink-0">
+                                class="w-10 h-10 rounded-full bg-[#D99052]/15 border border-[#D99052]/35 flex items-center justify-center text-[#D99052] shrink-0 shadow-sm">
                                 <i class="fas fa-phone-alt text-xs"></i>
                             </div>
                             <div>
@@ -939,7 +1033,7 @@
 
                         <div class="flex items-start gap-4">
                             <div
-                                class="w-10 h-10 rounded-full bg-burntOrange/10 border border-burntOrange/20 flex items-center justify-center text-burntOrange shrink-0">
+                                class="w-10 h-10 rounded-full bg-[#25D366]/15 border border-[#25D366]/35 flex items-center justify-center text-[#25D366] shrink-0 shadow-sm">
                                 <i class="fab fa-whatsapp text-sm"></i>
                             </div>
                             <div>
@@ -950,7 +1044,7 @@
 
                         <div class="flex items-start gap-4">
                             <div
-                                class="w-10 h-10 rounded-full bg-burntOrange/10 border border-burntOrange/20 flex items-center justify-center text-burntOrange shrink-0">
+                                class="w-10 h-10 rounded-full bg-[#EA4335]/15 border border-[#EA4335]/35 flex items-center justify-center text-[#EA4335] shrink-0 shadow-sm">
                                 <i class="fas fa-envelope text-xs"></i>
                             </div>
                             <div>
@@ -961,7 +1055,7 @@
 
                         <div class="flex items-start gap-4">
                             <div
-                                class="w-10 h-10 rounded-full bg-burntOrange/10 border border-burntOrange/20 flex items-center justify-center text-burntOrange shrink-0">
+                                class="w-10 h-10 rounded-full bg-[#0284C7]/15 dark:bg-[#38BDF8]/15 border border-[#0284C7]/35 dark:border-[#38BDF8]/35 flex items-center justify-center text-[#0284C7] dark:text-[#38BDF8] shrink-0 shadow-sm">
                                 <i class="fas fa-map-marker-alt text-xs"></i>
                             </div>
                             <div>
@@ -1084,51 +1178,171 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-xs">
 
-                <div class="space-y-3">
-                    <span class="block font-cinzel text-base font-semibold tracking-[0.16em] text-current">RN
-                        INTERIORS</span>
+                <div class="space-y-4">
+                    <a href="#home" class="inline-block focus:outline-none group" aria-label="RN Interiors by Vaishnavi">
+                        <img src="asset/rn_logo_dark.png" alt="RN Interiors by Vaishnavi"
+                            class="h-12 w-auto object-contain logo-dark opacity-95 group-hover:opacity-100 transition-opacity">
+                        <img src="asset/rn_logo_light.png" alt="RN Interiors by Vaishnavi"
+                            class="h-12 w-auto object-contain logo-light opacity-95 group-hover:opacity-100 transition-opacity">
+                    </a>
                     <p class="opacity-75 leading-relaxed font-light" data-i18n="footerTagline">Transforming spaces,
                         enriching lives. Premier interior studio curated by Vaishnavi.</p>
                 </div>
 
+                <!-- Quick Links Column -->
                 <div>
-                    <h4 class="font-cinzel uppercase text-xs tracking-[0.15em] mb-4 text-greige font-semibold"
-                        data-i18n="quickLinks">Quick Links</h4>
-                    <ul class="space-y-2 opacity-75 font-light">
-                        <li><a href="#home" class="hover:underline">Home</a></li>
-                        <li><a href="#about" class="hover:underline">About Us</a></li>
-                        <li><a href="#services" class="hover:underline">Services</a></li>
-                        <li><a href="#projects" class="hover:underline">Projects</a></li>
-                        <li><a href="#gallery" class="hover:underline">Gallery</a></li>
+                    <h4 class="font-cinzel uppercase text-xs tracking-[0.15em] mb-4 font-semibold text-current flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-[#D99052]/15 text-[#D99052] border border-[#D99052]/35 flex items-center justify-center text-[11px] shrink-0">
+                            <i class="fas fa-link"></i>
+                        </span>
+                        <span data-i18n="quickLinks">Quick Links</span>
+                    </h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#home" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#D99052]/15 text-[#D99052] border border-[#D99052]/35">
+                                    <i class="fas fa-home"></i>
+                                </span>
+                                <span data-i18n="home">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#about" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#F2C299]/20 text-[#D99052] border border-[#D99052]/35">
+                                    <i class="fas fa-user-tie"></i>
+                                </span>
+                                <span data-i18n="about">About Us</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#0284C7]/15 text-[#0284C7] dark:text-[#38BDF8] border border-[#0284C7]/35">
+                                    <i class="fas fa-compass-drafting"></i>
+                                </span>
+                                <span data-i18n="services">Services</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#projects" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#CA8A04]/15 text-[#CA8A04] dark:text-[#EAB308] border border-[#CA8A04]/35">
+                                    <i class="fas fa-briefcase"></i>
+                                </span>
+                                <span data-i18n="projects">Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#gallery" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#DB2777]/15 text-[#DB2777] dark:text-[#EC4899] border border-[#DB2777]/35">
+                                    <i class="fas fa-images"></i>
+                                </span>
+                                <span data-i18n="gallery">Gallery</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
+                <!-- Our Services Column -->
                 <div>
-                    <h4 class="font-cinzel uppercase text-xs tracking-[0.15em] mb-4 text-greige font-semibold"
-                        data-i18n="ourServices">Our Services</h4>
-                    <ul class="space-y-2 opacity-75 font-light">
-                        <li>Residential Interiors</li>
-                        <li>Modular Kitchens</li>
-                        <li>Turnkey Contracts</li>
-                        <li>Office Architecture</li>
+                    <h4 class="font-cinzel uppercase text-xs tracking-[0.15em] mb-4 font-semibold text-current flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-[#D99052]/15 text-[#D99052] border border-[#D99052]/35 flex items-center justify-center text-[11px] shrink-0">
+                            <i class="fas fa-layer-group"></i>
+                        </span>
+                        <span data-i18n="ourServices">Our Services</span>
+                    </h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#services" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#D99052]/15 text-[#D99052] border border-[#D99052]/35">
+                                    <i class="fas fa-couch"></i>
+                                </span>
+                                <span data-i18n="s1Title">Residential Interiors</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#F59E0B]/15 text-[#F59E0B] border border-[#F59E0B]/35">
+                                    <i class="fas fa-utensils"></i>
+                                </span>
+                                <span data-i18n="s2Title">Modular Kitchens</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#CA8A04]/15 text-[#CA8A04] dark:text-[#EAB308] border border-[#CA8A04]/35">
+                                    <i class="fas fa-key"></i>
+                                </span>
+                                <span data-i18n="s4Title">Turnkey Contracts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#0284C7]/15 text-[#0284C7] dark:text-[#38BDF8] border border-[#0284C7]/35">
+                                    <i class="fas fa-building"></i>
+                                </span>
+                                <span data-i18n="s3Title">Office Architecture</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="footer-link-item group">
+                                <span class="footer-link-icon bg-[#DB2777]/15 text-[#DB2777] dark:text-[#EC4899] border border-[#DB2777]/35">
+                                    <i class="fas fa-bed"></i>
+                                </span>
+                                <span data-i18n="s5Title">Living & Bedroom</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
+                <!-- Connect With Us Column -->
                 <div>
-                    <h4 class="font-cinzel uppercase text-xs tracking-[0.15em] mb-4 text-greige font-semibold"
-                        data-i18n="connect">Connect With Us</h4>
-                    <div class="flex space-x-3 text-base mb-4">
+                    <h4 class="font-cinzel uppercase text-xs tracking-[0.15em] mb-4 font-semibold text-current flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-[#D99052]/15 text-[#D99052] border border-[#D99052]/35 flex items-center justify-center text-[11px] shrink-0">
+                            <i class="fas fa-share-nodes"></i>
+                        </span>
+                        <span data-i18n="connect">Connect With Us</span>
+                    </h4>
+                    <div class="flex items-center space-x-2.5 mb-4">
                         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                            class="w-8 h-8 rounded-full border border-greige/30 flex items-center justify-center text-greige hover:bg-burntOrange hover:border-burntOrange hover:text-white transition-colors"
-                            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            class="social-icon-btn social-icon-instagram" aria-label="Instagram" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                            class="w-8 h-8 rounded-full border border-greige/30 flex items-center justify-center text-greige hover:bg-burntOrange hover:border-burntOrange hover:text-white transition-colors"
-                            aria-label="Facebook"><i class="fab fa-facebook-f text-xs"></i></a>
+                            class="social-icon-btn social-icon-facebook" aria-label="Facebook" title="Facebook">
+                            <i class="fab fa-facebook-f text-xs"></i>
+                        </a>
                         <a href="https://wa.me/917038693016" target="_blank" rel="noopener noreferrer"
-                            class="w-8 h-8 rounded-full border border-greige/30 flex items-center justify-center text-greige hover:bg-burntOrange hover:border-burntOrange hover:text-white transition-colors"
-                            aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            class="social-icon-btn social-icon-whatsapp" aria-label="WhatsApp" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="tel:7038693016"
+                            class="social-icon-btn social-icon-phone" aria-label="Direct Phone Call" title="Direct Phone Call">
+                            <i class="fas fa-phone-alt text-xs"></i>
+                        </a>
+                        <a href="mailto:info@rninteriors.com"
+                            class="social-icon-btn social-icon-email" aria-label="Email Consultation" title="Email Us">
+                            <i class="fas fa-envelope text-xs"></i>
+                        </a>
                     </div>
-                    <p class="opacity-75 font-light">Contact: +91 7038693016</p>
+                    <div class="space-y-2 text-xs">
+                        <a href="tel:7038693016" class="flex items-center gap-2 text-current hover:text-burntOrange transition-colors">
+                            <span class="w-5 h-5 rounded bg-[#D99052]/15 text-[#D99052] border border-[#D99052]/35 flex items-center justify-center text-[10px] shrink-0">
+                                <i class="fas fa-phone-alt"></i>
+                            </span>
+                            <span class="font-medium">+91 7038693016</span>
+                        </a>
+                        <a href="mailto:info@rninteriors.com" class="flex items-center gap-2 text-current hover:text-burntOrange transition-colors">
+                            <span class="w-5 h-5 rounded bg-[#EA4335]/15 text-[#EA4335] border border-[#EA4335]/35 flex items-center justify-center text-[10px] shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span>info@rninteriors.com</span>
+                        </a>
+                        <div class="flex items-center gap-2 text-current opacity-80 pt-0.5">
+                            <span class="w-5 h-5 rounded bg-[#0284C7]/15 text-[#0284C7] dark:text-[#38BDF8] border border-[#0284C7]/35 flex items-center justify-center text-[10px] shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                            <span>Baner Road, Pune, Maharashtra</span>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -1156,7 +1370,7 @@
     </div>
 
     <!-- Main JavaScript Logic -->
-    <script src="script.js"></script>
+    <script src="script.js?v=2.0"></script>
 </body>
 
 </html>
