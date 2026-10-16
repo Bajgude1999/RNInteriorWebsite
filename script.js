@@ -50,7 +50,7 @@ const translations = {
         proj1Desc: "Baner, Pune — A 4BHK lavish residence featuring Italian marble flooring, ambient warm lighting, and custom teak wood accents.",
         proj2Cat: "LUXURY RESIDENCE",
         proj2Title: "Minimalist Penthouse Living",
-        proj2Desc: "Worli, Mumbai — Sleek monochrome hues accented with brushed brass trims and modular ceiling profiles.",
+        proj2Desc: "Worli, Mumbai — Sleek monochrome hues accented with warm greige and burnt orange details.",
         proj3Cat: "MODULAR KITCHEN",
         proj3Title: "Opulent Kitchen Studio",
         proj3Desc: "Koregaon Park, Pune — Smart handle-less cabinets, quartz countertops, and integrated Blum fittings.",
@@ -154,7 +154,7 @@ const translations = {
         proj1Desc: "बाणेर, पुणे — इटालियन मार्बल आणि वूडन फिनिशिंगसह ४BHK लक्झरी फ्लॅट.",
         proj2Cat: "लक्झरी निवास",
         proj2Title: "पेन्टहाऊस लिव्हिंग",
-        proj2Desc: "वरळी, मुंबई — मॉडर्न थीम आणि ब्रास टचसह डिझाइन केलेले पेन्टहाऊस.",
+        proj2Desc: "वरळी, मुंबई — मॉडर्न थीम आणि वॉर्म ग्रेजसह डिझाइन केलेले पेन्टहाऊस.",
         proj3Cat: "मॉड्यूलर किचन",
         proj3Title: "मॉडर्न किचन स्टुडिओ",
         proj3Desc: "कोरेगाव पार्क, पुणे — स्मार्ट हँडल-लेस कॅबिनेट आणि क्वार्ट्ज टॉप.",
@@ -258,7 +258,7 @@ const translations = {
         proj1Desc: "बानेर, पुणे — इटैलियन मार्बल और प्रीमियम वूड फिनिश 4BHK होम।",
         proj2Cat: "लक्जरी होम",
         proj2Title: "पेंटहाउस लिविंग",
-        proj2Desc: "वर्ली, मुंबई — मॉडर्न थीम और ब्रास हाइलाइट्स।",
+        proj2Desc: "वर्ली, मुंबई — मॉडर्न थीम और वॉर्म ग्रेज हाइलाइट्स।",
         proj3Cat: "मॉड्यूलर किचन",
         proj3Title: "मॉडर्न किचन स्टूडियो",
         proj3Desc: "कोरेगांव पार्क, पुणे — स्मार्ट हैंडल-लेस कैबिनेट्स।",
@@ -383,9 +383,9 @@ function showSlide(index) {
     const dots = document.querySelectorAll('#carouselDots button');
     dots.forEach((dot, i) => {
         if (i === index) {
-            dot.className = 'w-3 h-3 rounded-full bg-yellow-500';
+            dot.className = 'w-3 h-3 rounded-full bg-[#D99052] transition-all duration-300';
         } else {
-            dot.className = 'w-3 h-3 rounded-full bg-gray-600';
+            dot.className = 'w-3 h-3 rounded-full bg-[#D99052]/30 hover:bg-[#D99052]/60 transition-all duration-300';
         }
     });
     currentSlide = index;
@@ -421,9 +421,11 @@ function filterGallery(category) {
 
     btns.forEach(btn => {
         if (btn.getAttribute('data-filter') === category) {
-            btn.classList.add('active', 'bg-yellow-500/10', 'text-amber-500');
+            btn.classList.add('active', 'bg-[#D99052]', 'text-white', 'font-semibold', 'border-[#D99052]');
+            btn.classList.remove('opacity-70');
         } else {
-            btn.classList.remove('active', 'bg-yellow-500/10', 'text-amber-500');
+            btn.classList.remove('active', 'bg-[#D99052]', 'text-white', 'text-[#0A0A0A]', 'font-semibold', 'border-[#D99052]');
+            btn.classList.add('opacity-70');
         }
     });
 
